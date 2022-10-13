@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "584398274153",
+    "project_id": "latihan-soal-8afe3",
+    "storage_bucket": "latihan-soal-8afe3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584398274153:android:caac47d611c2252ad3acf8",
+        "android_client_info": {
+          "package_name": "com.example.app_final_latsol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584398274153-eub7ieme815j8b7tdn4rdg8gv47rs6dp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsrmxyQrqNXTrZQW6KESz7YFvRJNdMMQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584398274153-eub7ieme815j8b7tdn4rdg8gv47rs6dp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "584398274153-ondd5vgrbbsfp2b4tjq8ihgsa748bag7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.appFinalLatsol"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

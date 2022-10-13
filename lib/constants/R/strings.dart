@@ -6,6 +6,7 @@ class Strings {
   String loginDesc2 = "Aplikasi Latihan dan Konsultasi Soal";
   String loginWithGoogle = "Masuk Dengan Google";
   String loginWithApple = "Masuk Dengan Apple";
+  String loginWithEmail = "Masuk Dengan Email";
 
 // REGISTER PAGE
   String daftar = "DAFTAR";

@@ -57,30 +57,6 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 15),
-          child: ButtonLogin(
-            onTap: () {
-              // Navigator.of(context).pushNamed(MainPage.route);
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                MainPage.route,
-                (context) => false,
-              );
-            },
-            backgroundColor: R.colors.primary,
-            borderColor: R.colors.primary,
-            child: Text(
-              R.strings.daftar,
-              style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -270,6 +246,28 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: namaSekolahController,
                 title: 'Nama Sekolah',
                 hintText: 'Ketik Nama Sekolah',
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              ButtonLogin(
+                onTap: () {
+                  // Navigator.of(context).pushNamed(MainPage.route);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    MainPage.route,
+                    (context) => false,
+                  );
+                },
+                backgroundColor: R.colors.primary,
+                borderColor: R.colors.primary,
+                child: Text(
+                  R.strings.daftar,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ],
           ),

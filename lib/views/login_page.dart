@@ -1,3 +1,5 @@
+import 'package:app_final_latsol/views/login_form_page.dart';
+
 import '../constants/r.dart';
 import '../views/register_page.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               const SizedBox(
-                height: 15,
+                height: 55,
               ),
               Align(
                 alignment: Alignment.topLeft,
@@ -73,6 +75,26 @@ class _LoginPageState extends State<LoginPage> {
               const Spacer(),
               ButtonLogin(
                 onTap: () {
+                  Navigator.of(context).pushNamed(LoginForm.route);
+                },
+                backgroundColor: Colors.blueAccent,
+                borderColor: Colors.blueAccent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      R.strings.loginWithEmail,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ButtonLogin(
+                onTap: () {
                   Navigator.of(context).pushNamed(RegisterPage.route);
                 },
                 backgroundColor: Colors.white,
@@ -117,6 +139,24 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Belum punya akun? daftar "),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(RegisterPage.route);
+                    },
+                    child: const Text(
+                      "disini",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              )
             ],
           ),
         ));
@@ -142,7 +182,7 @@ class ButtonLogin extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
-        vertical: 12,
+        vertical: 15,
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

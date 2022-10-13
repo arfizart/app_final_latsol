@@ -1,3 +1,6 @@
+import 'package:app_final_latsol/views/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../../auth/auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/r.dart';
@@ -10,6 +13,23 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final User? user = Auth().currentUser;
+
+  Future<void> signOut() async {
+    await Auth().signOut();
+  }
+
+  Widget _userUid() {
+    return Text(
+      user?.email ?? "User Email",
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,16 +70,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Nama User",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(
+                      children: [
+                        _userUid(),
+                        const Text(
                           "Nama Sekolah",
                           style: TextStyle(
                             fontSize: 12,
@@ -193,19 +206,27 @@ class _ProfilePageState extends State<ProfilePage> {
                   )
                 ],
               ),
-              child: Row(children: const [
-                Icon(
-                  Icons.exit_to_app,
-                  color: Colors.red,
-                ),
-                SizedBox(width: 10),
-                Text(
-                  "Title",
-                  style: TextStyle(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).popAndPushNamed(
+                    LoginPage.route,
+                  );
+                  signOut();
+                },
+                child: Row(children: const [
+                  Icon(
+                    Icons.exit_to_app,
                     color: Colors.red,
                   ),
-                ),
-              ]),
+                  SizedBox(width: 10),
+                  Text(
+                    "Sign Out",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ]),
+              ),
             ),
             const SizedBox(
               height: 35,

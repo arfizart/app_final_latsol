@@ -1,16 +1,29 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../../auth/auth.dart';
 import '../../../constants/r.dart';
 import './mapel_page.dart';
 
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final User? user = Auth().currentUser;
+
+  Widget _userUid() {
+    return Text(
+      user?.email ?? "User Email",
+      style: const TextStyle(
+        fontWeight: FontWeight.w600,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  Container(
+                  SizedBox(
                     height: 170,
                     child: ListView.builder(
                         itemCount: 5,
@@ -158,14 +171,9 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  "Hi, Nama User",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                Text(
+              children: [
+                _userUid(),
+                const Text(
                   "Selamat Datang",
                   style: TextStyle(),
                 ),

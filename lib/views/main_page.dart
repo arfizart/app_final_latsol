@@ -42,7 +42,7 @@ class _MainPageState extends State<MainPage> {
       body: PageView(
         controller: _pc,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [
+        children: [
           HomePage(),
           ProfilePage(),
         ],
@@ -60,7 +60,7 @@ class _MainPageState extends State<MainPage> {
       ]),
       child: BottomAppBar(
         color: Colors.white,
-        child: Container(
+        child: SizedBox(
           height: 60,
           child: Row(
             children: [
