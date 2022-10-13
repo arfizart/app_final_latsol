@@ -9,6 +9,8 @@ import 'views/main_page.dart';
 import 'views/register_page.dart';
 import 'views/splash_screen.dart';
 
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => const SplashScreen(),
         LoginPage.route: (context) => const LoginPage(),
         RegisterPage.route: (context) => const RegisterPage(),
-        MainPage.route: (context) => MainPage(),
+        MainPage.route: (context) => const MainPage(),
         MapelPage.route: (context) => const MapelPage(),
         PaketSoalPage.route: (context) => const PaketSoalPage(),
         LoginForm.route: (context) => const LoginForm(),

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../auth/auth.dart';
 import '../constants/r.dart';
 import '../views/login_page.dart';
 import '../views/main_page.dart';
@@ -15,16 +16,35 @@ class LoginForm extends StatefulWidget {
   State<LoginForm> createState() => _LoginFormState();
 }
 
-enum Gender { lakilaki, perempuan }
-
 class _LoginFormState extends State<LoginForm> {
+  String? errorMessage = '';
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+  Future<void> signIn() async {
+    try {
+      await Auth().signInWithEmailAndPassword(
         email: emailController.text.trim(),
-        password: passwordController.text.trim());
+        password: passwordController.text.trim(),
+      );
+      setState(() {
+        Navigator.of(context).pushNamed(MainPage.route);
+      });
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+  }
+
+  Widget _errorMessage() {
+    return Center(
+      child: Text(
+        errorMessage == '' ? '' : 'Error! $errorMessage',
+        textAlign: TextAlign.center,
+        style: const TextStyle(color: Colors.red),
+      ),
+    );
   }
 
   @override
@@ -109,14 +129,15 @@ class _LoginFormState extends State<LoginForm> {
               const SizedBox(
                 height: 20,
               ),
+              _errorMessage(),
               ButtonLogin(
                 onTap: () {
                   signIn();
                   // Navigator.of(context).pushNamed(MainPage.route);
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    MainPage.route,
-                    (context) => false,
-                  );
+                  // Navigator.of(context).pushNamedAndRemoveUntil(
+                  //   MainPage.route,
+                  //   (context) => false,
+                  // );
                 },
                 backgroundColor: R.colors.primary,
                 borderColor: R.colors.primary,

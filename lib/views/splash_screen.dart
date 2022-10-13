@@ -1,7 +1,8 @@
 import '../constants/r.dart';
-import '../views/login_page.dart';
+// import '../views/login_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import '../auth/path.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -10,9 +11,9 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
-      // Navigator.of(context)
-      //     .push(MaterialPageRoute(builder: (context) => LoginPage()));
-      Navigator.of(context).pushReplacementNamed(LoginPage.route);
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const PathTree()));
+      // Navigator.of(context).pushReplacementNamed(LoginPage.route);
     });
 
     return Scaffold(

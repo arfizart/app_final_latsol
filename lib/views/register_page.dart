@@ -1,3 +1,6 @@
+import 'package:app_final_latsol/auth/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../constants/r.dart';
 import '../views/login_page.dart';
 import '../views/main_page.dart';
@@ -14,6 +17,7 @@ class RegisterPage extends StatefulWidget {
 enum Gender { lakilaki, perempuan }
 
 class _RegisterPageState extends State<RegisterPage> {
+  String? errorMessage = '';
   String gender = "Laki-laki";
   List<String> classSlta = ["10", "11", "12"];
   String selectedClass = "10";
@@ -28,8 +32,35 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final namaLengkapController = TextEditingController();
   final namaSekolahController = TextEditingController();
+
+  Future<void> createUserWithEmailAndPassword() async {
+    try {
+      await Auth().createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      setState(() {
+        Navigator.of(context).pushNamed(MainPage.route);
+      });
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+  }
+
+  Widget _errorMessage() {
+    return Center(
+      child: Text(
+        errorMessage == '' ? '' : 'Error! $errorMessage',
+        textAlign: TextAlign.center,
+        style: const TextStyle(color: Colors.red),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +98,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: emailController,
                 title: 'Email',
                 hintText: 'Ketik Email',
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              RegisterPasswordField(
+                controller: passwordController,
+                title: 'Password',
+                hintText: 'Ketik Password',
               ),
               const SizedBox(
                 height: 15,
@@ -250,13 +289,15 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 15,
               ),
+              _errorMessage(),
               ButtonLogin(
                 onTap: () {
+                  createUserWithEmailAndPassword();
                   // Navigator.of(context).pushNamed(MainPage.route);
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    MainPage.route,
-                    (context) => false,
-                  );
+                  // Navigator.of(context).pushNamedAndRemoveUntil(
+                  //   MainPage.route,
+                  //   (context) => false,
+                  // );
                 },
                 backgroundColor: R.colors.primary,
                 borderColor: R.colors.primary,
@@ -316,6 +357,60 @@ class RegisterTextField extends StatelessWidget {
             ),
           ),
           child: TextField(
+            controller: controller,
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: hintText,
+                hintStyle: TextStyle(
+                  color: R.colors.greyHintText,
+                )),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class RegisterPasswordField extends StatelessWidget {
+  const RegisterPasswordField({
+    Key? key,
+    required this.title,
+    required this.hintText,
+    this.controller,
+  }) : super(key: key);
+
+  final String title;
+  final String hintText;
+  final TextEditingController? controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 14,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.white,
+            border: Border.all(
+              color: R.colors.greyBorder,
+            ),
+          ),
+          child: TextField(
+            obscureText: true,
             controller: controller,
             decoration: InputDecoration(
                 border: InputBorder.none,
